@@ -9,11 +9,22 @@ if(flagfora){
     buttons.forEach((button) => {
         button.addEventListener("click",function value(){
             if(button.classList.contains("operator")){
+                console.log(button.id)
                 a = +(temp);
                 flagfora = false;
-                add() ? (button.id == "+") : 
-                sub() ? (button.id == "-") : 
-                multiply() ? (button.id == "*") : divide()
+                console.log(flagfora)
+                if(button.id == "+"){
+                    return add();
+                }
+                else if(button.id == "-"){
+                    return sub();
+                }
+                else if(button.id == "*"){
+                    return multiply();
+                }
+                else{
+                    return divide();
+                }
             }
             else{
                 temp += button.id;
@@ -22,32 +33,49 @@ if(flagfora){
         })
     })
 }
-function getb(){
-    numbuttons.forEach((button)=>{
-        button.addEventListener("click",()=>{
-            b = button.id;
+else{
+    function add(a){
+        numbuttons.forEach((buttonx)=>{
+            buttonx.addEventListener("click",()=>{
+                console.log(buttonx.id)
+                b = +(buttonx.id);
+                console.log(a+b);
+                return;
+            })
+        })
+}
+function sub(a){
+    numbuttons.forEach((buttonx)=>{
+        buttonx.addEventListener("click",()=>{
+            console.log(flagfora)
+            console.log(buttonx.id)
+            b = +(buttonx.id);
+            console.log(a-b);
+            return;
         })
     })
-    return b;
 }
-function add(a,b){
-    getb();
-    answer = a + b;
-    console.log(answer);
-    return;
+function multiply(a){
+    numbuttons.forEach((buttonx)=>{
+        buttonx.addEventListener("click",()=>{
+            console.log(flagfora)
+            console.log(buttonx.id)
+            b = +(buttonx.id);
+            console.log(a*b);
+            return;
+        })
+    })
 }
-function sub(a,b){
-    getb();
-    answer = a - b;
-    return;
+function divide(a){
+    numbuttons.forEach((buttonx)=>{
+        buttonx.addEventListener("click",()=>{
+            console.log(flagfora)
+            console.log(buttonx.id)
+            b = +(buttonx.id);
+            console.log(a/b);
+            return;
+        })
+    })
 }
-function multiply(a,b){
-    getb();
-    answer = a * b;
-    return;
 }
-function divide(a,b){
-    getb();
-    answer = a / b;
-    return;
-}
+
