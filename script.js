@@ -1,6 +1,8 @@
 const buttons = document.querySelectorAll(".btn");
 const numbuttons = document.querySelectorAll(".numbtn")
+const display = document.querySelector(".display")
 let flagfora = true;
+let flagForAns = false;
 let temp1 = "";
 let temp2 = "";
 let answer;
@@ -14,31 +16,57 @@ let operand2;
                 operand1 = +(temp1);
                 flagfora = false;
                 operator = button.id;
+                display.textContent += operator;
             }
-            else if(flagfora){
+            else if((flagfora) && button.id != "="){
                 temp1 += button.id;
-                console.log(temp1);
+                flagForAns = true;
+                display.textContent = temp1;
+                console.log(display.textContent);
             }
             else if(flagfora == false && button.id != "="){
                 temp2 += button.id;
+                display.textContent += temp2;
                 console.log(temp2);
             }
-            else if(button.id == "="){
+            else if(button.id == "=" && (flagForAns)){
                 operand2 = +(temp2);
+                flagForAns = false;
+                function valueReset(){
+                    temp2 = "";
+                    flagfora = true;
+                    operator = "";
+                    display.textContent = temp1;
+                    return temp1;
+                }
                 if(operator == "+"){
                     console.log(operand1 + operand2);
                     temp1 = String(operand1 + operand2);
-                    flagfora = true;
-                    return temp1; 
+                    return valueReset();
                 }
                 else if(operator == "-"){
-                    return console.log(operand1 - operand2);
+                    console.log(operand1 - operand2);
+                    temp1 = String(operand1 - operand2);
+                    return valueReset(); 
                 }
                 else if(operator == "*"){
-                    return console.log(operand1 * operand2);
+                    console.log(operand1 * operand2);
+                    temp1 = String(operand1 * operand2);
+                    return valueReset();
+                }
+                else if(operator == "/"){
+                    console.log(operand1 / operand2);
+                    temp1 = String(operand1 / operand2);
+                    return valueReset();
+                }
+                else if(operator == "%"){
+                    console.log(operand1 % operand2);
+                    temp1 = String(operand1 % operand2);
+                    return valueReset();
                 }
                 else{
-                    return console.log(operand1 / operand2);
+                    console.log(temp1);
+                    return valueReset();
                 }
             }
         })
