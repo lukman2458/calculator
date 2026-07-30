@@ -19,15 +19,28 @@ let operand2;
                 display.textContent += operator;
             }
             else if((flagfora) && button.id != "="){
-                temp1 += button.id;
-                flagForAns = true;
-                display.textContent = temp1;
-                console.log(display.textContent);
+                if(temp1 == "0"){
+                    temp1 = button.id;
+                    display.textContent = temp1;
+                }
+                else{
+                    temp1 += button.id;
+                    display.textContent = temp1;
+                    console.log(display.textContent);
+                }
             }
             else if(flagfora == false && button.id != "="){
-                temp2 += button.id;
-                display.textContent += temp2;
-                console.log(temp2);
+                if(temp2 == "0"){
+                    temp2 = button.id;
+                    display.textContent = temp2;
+                    flagForAns = true;
+                }
+                else{
+                    temp2 += button.id;
+                    display.textContent = temp2;
+                    flagForAns = true;
+                    console.log(temp2);
+                }
             }
             else if(button.id == "=" && (flagForAns)){
                 operand2 = +(temp2);
