@@ -25,26 +25,38 @@ buttons.forEach((button) => {
                 temp1 = button.id;
                 display.textContent = temp1;
             }
+            else if(button.id == "back"){
+                temp1 = temp1.slice(0,-1);
+                display.textContent = temp1;
+            }
             else {
                 temp1 += button.id;
                 display.textContent = temp1;
-                console.log(display.textContent);
             }
         }
         else if (flagfora == false && !button.classList.contains("leaveIt")) {
             if (temp2 == "0") {
                 temp2 = button.id;
-                display.textContent = temp2;
+                display.textContent = temp1 + operator + temp2;
                 flagForAns = true;
             }
             else if (button.classList.contains("operator")) {
                 return calculate();
             }
+            else if(button.id == "back"){
+                temp2 = temp2.slice(0,-1);
+                display.textContent = temp1 + operator + temp2;
+                flagForAns = true;
+            }
+            // else if(button.id == "back"){
+            // temp2 = temp2.slice(0,-1);
+            // console.log("work")
+            // flagForAns = true;
+            // }
             else {
                 temp2 += button.id;
-                display.textContent = temp2;
+                display.textContent = temp1 + operator + temp2;
                 flagForAns = true;
-                console.log(temp2);
             }
         }
         else if ((button.id == "=" && (flagForAns))) {
@@ -54,21 +66,22 @@ buttons.forEach((button) => {
             temp1 = ""
             return valueReset();
         }
-        else if(button.id == "back"){
-            if(flagfora == true){
-                temp1 = temp1.slice(0,-1);
-            }
-            else if(flagForOperator1 == false){
-                flagForOperator1 = true;
-                flagfora = true;
-                operator = "";
-            }
-            else if(flagfora == false){
-                flagForAns = false;
-                temp2 = temp2.slice(0,-1);
-            }
-            display.textContent = display.textContent.slice(0,-1);
-        }
+        // else if(button.id == "back"){
+        //     if(flagfora == true){
+        //         temp1 = temp1.slice(0,-1);
+        //     }
+        //     else if(flagForOperator1 == false){
+        //         flagForOperator1 = true;
+        //         flagfora = true;
+        //         operator = "";
+        //     }
+        //     else if(flagfora == false){
+        //         flagForAns = false;
+        //         console.log("work")
+        //         temp2 = temp2.slice(0,-1);
+        //     }
+        //     display.textContent = display.textContent.slice(0,-1);
+        // }
     })
 })
 function calculate() {
