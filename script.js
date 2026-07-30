@@ -4,6 +4,7 @@ const display = document.querySelector(".display")
 let flagfora = true;
 let flagForAns = false;
 let flagForOperator = false;
+let flagForOperator1 = false;
 let temp1 = "";
 let temp2 = "";
 let answer;
@@ -12,14 +13,16 @@ let operator;
 let operand2;
     buttons.forEach((button) => {
         button.addEventListener("click",function value(){
-            if(button.classList.contains("operator")){
+            if(flagForOperator1 && button.classList.contains("operator")){
                 console.log(button.id)
                 operand1 = +(temp1);
+                flagForOperator1 = false;
                 flagfora = false;
                 operator = button.id;
                 display.textContent += operator;
             }
-            else if((flagfora) && button.id != "="){
+            else if(flagfora && button.id != "=" && !(button.classList.contains("operator"))){
+                flagForOperator1 = true;
                 if(temp1 == "0"){
                     temp1 = button.id;
                     display.textContent = temp1;
@@ -54,6 +57,7 @@ let operand2;
                 function valueReset(){
                     temp2 = "";
                     flagfora = true;
+                    flagForOperator1 = true;
                     operator = "";
                     display.textContent = temp1;
                     return temp1;
@@ -74,9 +78,20 @@ let operand2;
                     return valueReset();
                 }
                 else if(operator == "/"){
-                    console.log(operand1 / operand2);
-                    temp1 = String(operand1 / operand2);
-                    return valueReset();
+                    if(operand2 == 0){
+                        temp1 = "Error";
+                        temp2 = "";
+                        flagfora = true;
+                        operator = "";
+                        display.textContent = temp1;
+                        temp1 = "0"
+                        return temp1;
+                    }
+                    else{
+                        console.log(operand1 / operand2);
+                        temp1 = String(operand1 / operand2);
+                        return valueReset();
+                    }
                 }
                 else if(operator == "%"){
                     console.log(operand1 % operand2);
