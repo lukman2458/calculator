@@ -3,6 +3,7 @@ const numbuttons = document.querySelectorAll(".numbtn")
 const display = document.querySelector(".display")
 let flagfora = true;
 let flagForAns = false;
+let flagForOperator = false;
 let temp1 = "";
 let temp2 = "";
 let answer;
@@ -35,6 +36,10 @@ let operand2;
                     display.textContent = temp2;
                     flagForAns = true;
                 }
+                else if(button.classList.contains("operator")){
+                    flagForAns = true;
+                    flagForOperator = true;
+                }
                 else{
                     temp2 += button.id;
                     display.textContent = temp2;
@@ -42,8 +47,9 @@ let operand2;
                     console.log(temp2);
                 }
             }
-            else if(button.id == "=" && (flagForAns)){
+            else if((button.id == "=" && (flagForAns)) || (flagForOperator)){
                 operand2 = +(temp2);
+                flagForOperator = false;
                 flagForAns = false;
                 function valueReset(){
                     temp2 = "";
