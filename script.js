@@ -2,7 +2,6 @@ const buttons = document.querySelectorAll(".btn");
 const display = document.querySelector(".display")
 let flagfora = true;
 let flagForAns = false;
-let flagForOperator = false;
 let flagForOperator1 = false;
 let temp1 = "";
 let temp2 = "";
@@ -55,11 +54,25 @@ buttons.forEach((button) => {
             temp1 = ""
             return valueReset();
         }
+        else if(button.id == "back"){
+            if(flagfora == true){
+                temp1 = temp1.slice(0,-1);
+            }
+            else if(flagForOperator1 == false){
+                flagForOperator1 = true;
+                flagfora = true;
+                operator = "";
+            }
+            else if(flagfora == false){
+                flagForAns = false;
+                temp2 = temp2.slice(0,-1);
+            }
+            display.textContent = display.textContent.slice(0,-1);
+        }
     })
 })
 function calculate() {
     operand2 = +(temp2);
-    // flagForOperator = false;
     if (operator == "+") {
         console.log(operand1 + operand2);
         temp1 = String(operand1 + operand2);
