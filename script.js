@@ -19,6 +19,7 @@ buttons.forEach((button) => {
             operator = button.id;
             display.textContent += operator;
         }
+
         else if (flagfora && !(button.classList.contains("leavePlusOperator"))) {
             flagForOperator1 = true;
             if (temp1 == "0") {
@@ -27,6 +28,9 @@ buttons.forEach((button) => {
             }
             else if(button.id == "back"){
                 temp1 = temp1.slice(0,-1);
+                display.textContent = temp1;
+            }
+            else if(button.id == "." && temp1.includes(".")){
                 display.textContent = temp1;
             }
             else {
@@ -43,16 +47,20 @@ buttons.forEach((button) => {
             else if (button.classList.contains("operator")) {
                 return calculate();
             }
+            else if(button.id == "." && temp2.includes(".")){
+                display.textContent = temp1 + operator + temp2;
+            }
             else if(button.id == "back"){
                 temp2 = temp2.slice(0,-1);
                 display.textContent = temp1 + operator + temp2;
                 flagForAns = true;
+                if(temp2 == ""){
+                    operator = ""
+                    display.textContent = temp1;
+                    console.log("works")
+                    flagfora = true;
+                }
             }
-            // else if(button.id == "back"){
-            // temp2 = temp2.slice(0,-1);
-            // console.log("work")
-            // flagForAns = true;
-            // }
             else {
                 temp2 += button.id;
                 display.textContent = temp1 + operator + temp2;
@@ -66,29 +74,13 @@ buttons.forEach((button) => {
             temp1 = ""
             return valueReset();
         }
-        // else if(button.id == "back"){
-        //     if(flagfora == true){
-        //         temp1 = temp1.slice(0,-1);
-        //     }
-        //     else if(flagForOperator1 == false){
-        //         flagForOperator1 = true;
-        //         flagfora = true;
-        //         operator = "";
-        //     }
-        //     else if(flagfora == false){
-        //         flagForAns = false;
-        //         console.log("work")
-        //         temp2 = temp2.slice(0,-1);
-        //     }
-        //     display.textContent = display.textContent.slice(0,-1);
-        // }
     })
 })
 function calculate() {
     operand2 = +(temp2);
     if (operator == "+") {
         console.log(operand1 + operand2);
-        temp1 = String(operand1 + operand2);
+        temp1 = String((operand1 + operand2));
         return valueReset();
     }
     else if (operator == "-") {
